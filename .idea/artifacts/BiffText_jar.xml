@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="BiffText:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/BiffText_jar</output-path>
+    <root id="archive" name="BiffText.jar">
+      <element id="module-output" name="BiffText" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../BiffLib/out/artifacts/BiffLib_jar/BiffLib.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

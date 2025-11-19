@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="BiffLib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../BiffLib/out/artifacts/BiffLib_jar/BiffLib.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

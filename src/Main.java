@@ -1,13 +1,55 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-  //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-  // to see how IntelliJ IDEA suggests fixing it.
-  IO.println(String.format("Hello and welcome!"));
+import net.bifflib.GUI.Window;
 
-  for (int i = 1; i <= 5; i++) {
-    //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-    // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-    IO.println("i = " + i);
-  }
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class Main{
+    public static void main(String[] args) {
+        boolean saved = false;
+        JFrame window = Window.makeWindow(800,700,"Text Editor",new ImageIcon(Main.class.getResource("T.png")).getImage());
+        window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        window.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                JOptionPane saveOrExit = new JOptionPane("Your Work has not been saved. Do you want to save it?", JOptionPane.INFORMATION_MESSAGE,JOptionPane.YES_NO_CANCEL_OPTION);
+                int button = JOptionPane.showOptionDialog(window,
+                        "Your Work has not been saved. Do you want to save it?",
+                        "Save Warning",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE,
+                        null,
+                        null,
+                        null);
+                if (button == 1) {
+                    System.exit(0);
+                }
+            }
+        });
+        JTextArea textBox = new JTextArea("Type Here: ");
+        JRadioButton distraction = new JRadioButton("Distracting you!");
+        distraction.requestFocusInWindow();
+        window.add(distraction);
+        textBox.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (textBox.getText().equals("Type Here: ")){
+                    textBox.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (textBox.getText().isEmpty()){
+                    textBox.setText("Type Here: ");
+                }
+            }
+        });
+        Font font = new Font("Times New Roman", Font.PLAIN, 14);
+        textBox.setFont(font);
+        textBox.setTabSize(4);
+        textBox.setLineWrap(true);
+        window.add(textBox);
+        window.setVisible(true);
+    }
 }

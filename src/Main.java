@@ -7,7 +7,6 @@ import java.awt.event.*;
 public class Main{
     public static void main(String[] args) {
         boolean saved = false;
-
         JFrame window = Window.makeWindow(800,700,"Text Editor",new ImageIcon(Main.class.getResource("T.png")).getImage(), Color.WHITE);
         window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         window.addWindowListener(new WindowAdapter() {
@@ -27,17 +26,18 @@ public class Main{
                 }
             }
         });
-        JTextArea textBox = new JTextArea("Type Here: ");
-        JScrollBar scroll = new JScrollBar(JScrollBar.VERTICAL,0,5,0,100);
-        var scrollBarAdjuster = new ScrollBarAdjustmentListner(textBox,textBox.getY(),scroll);
-        scroll.addAdjustmentListener(scrollBarAdjuster);
-        window.add(scroll, BorderLayout.EAST);
+        JTextArea textBox = new JTextArea(8,5);
+        textBox.setText("Type Here: ");
+        JScrollPane scroll = new JScrollPane(textBox);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-        window.addMouseWheelListener(new MouseScrollListner(scroll));
+        scroll.setPreferredSize(new Dimension(100,100));
+        scroll.setVisible(true);
+        window.add(scroll);
+        scroll.getVerticalScrollBar().requestFocusInWindow();
 
-        JRadioButton distraction = new JRadioButton("Distracting you!");
-        distraction.requestFocusInWindow();
-        window.add(distraction);
+
+
         textBox.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -58,7 +58,7 @@ public class Main{
         textBox.setFont(font);
         textBox.setTabSize(4);
         textBox.setLineWrap(true);
-        window.add(textBox);
+        textBox.setWrapStyleWord(true);
         window.setVisible(true);
 
     }

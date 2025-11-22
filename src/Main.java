@@ -33,6 +33,8 @@ public class Main{
         scroll.addAdjustmentListener(scrollBarAdjuster);
         window.add(scroll, BorderLayout.EAST);
 
+        window.addMouseWheelListener(new MouseScrollListner(scroll));
+
         JRadioButton distraction = new JRadioButton("Distracting you!");
         distraction.requestFocusInWindow();
         window.add(distraction);

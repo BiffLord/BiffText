@@ -15,4 +15,7 @@ public class ScrollBarAdjustmentListner implements AdjustmentListener {
     public void adjustmentValueChanged(AdjustmentEvent e) {
         textbox.setBounds(textbox.getX(), yBase-scroll.getValue()*2, textbox.getWidth(), textbox.getHeight());
     }
+    public void adjustValue(){
+        adjustmentValueChanged(new AdjustmentEvent(scroll,1,1,1));
+    }
 }

@@ -31,8 +31,11 @@ public class MenuActionListener implements ActionListener {
         else if (e.getActionCommand().equals("save")){
             if (filePath != null){
                 net.bifflib.files.FileUploader.uploadFile(filePath,text.getText());
+            } else{
+                actionPerformed(new ActionEvent(e.getSource(), e.getID(), "save as"));
             }
         }
+
         else if (e.getActionCommand().equals("save as")){
             JFileChooser chooser = new JFileChooser();
             if (chooser.showOpenDialog(chooser) == JFileChooser.APPROVE_OPTION){

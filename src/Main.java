@@ -9,10 +9,17 @@ public class Main{
         boolean saved = false;
         JFrame window = Window.makeWindow(800,700,"Text Editor",new ImageIcon(Main.class.getResource("T.png")).getImage(), Color.WHITE);
         window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        JTextArea textBox = new JTextArea(8,5);
+        textBox.setText("Type Here: ");
+        Font font = new Font("Times New Roman", Font.PLAIN, 14);
+        textBox.setFont(font);
+        textBox.setTabSize(1);
+        textBox.setLineWrap(true);
+        textBox.setWrapStyleWord(true);
+        var menuAction = new MenuActionListener(textBox);
         window.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                JOptionPane saveOrExit = new JOptionPane("Your Work has not been saved. Do you want to save it?", JOptionPane.INFORMATION_MESSAGE,JOptionPane.YES_NO_CANCEL_OPTION);
                 int button = JOptionPane.showOptionDialog(window,
                         "Your Work has not been saved. Do you want to save it?",
                         "Save Warning",
@@ -24,6 +31,11 @@ public class Main{
                 if (button == 1) {
                     System.exit(0);
                 }
+                else if (button ==0){
+                    menuAction.actionPerformed(new ActionEvent(window, 1, "save"));
+                    System.exit(0);
+                }
+
             }
         });
 
@@ -35,14 +47,7 @@ public class Main{
         fileMenu.add(new JMenuItem("Print"));
         var openButton = new JMenuItem("Open");
         openButton.setActionCommand("open file");
-        JTextArea textBox = new JTextArea(8,5);
-        textBox.setText("Type Here: ");
-        Font font = new Font("Times New Roman", Font.PLAIN, 14);
-        textBox.setFont(font);
-        textBox.setTabSize(1);
-        textBox.setLineWrap(true);
-        textBox.setWrapStyleWord(true);
-        var menuAction = new MenuActionListener(textBox);
+
         openButton.addActionListener(menuAction);
         openButton.setAccelerator(KeyStroke.getKeyStroke('O', ActionEvent.CTRL_MASK));
         fileMenu.add(openButton);

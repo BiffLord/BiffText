@@ -3,9 +3,9 @@ import net.bifflib.GUI.Window;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
 public class Main{
     public static void main(String[] args) {
+        //This comment, wrote in this program, BY this program
         boolean saved = false;
         JFrame window = Window.makeWindow(800,700,"Text Editor",new ImageIcon(Main.class.getResource("T.png")).getImage(), Color.WHITE);
         window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -26,8 +26,36 @@ public class Main{
                 }
             }
         });
+
+        JMenuBar menu = new JMenuBar();
+        JMenu fileMenu = new JMenu("File");
+        fileMenu.setMnemonic('F');
+
+        menu.add(fileMenu);
+        fileMenu.add(new JMenuItem("Print"));
+        var openButton = new JMenuItem("Open");
+        openButton.setActionCommand("open file");
         JTextArea textBox = new JTextArea(8,5);
         textBox.setText("Type Here: ");
+        Font font = new Font("Times New Roman", Font.PLAIN, 14);
+        textBox.setFont(font);
+        textBox.setTabSize(1);
+        textBox.setLineWrap(true);
+        textBox.setWrapStyleWord(true);
+        var menuAction = new MenuActionListener(textBox);
+        openButton.addActionListener(menuAction);
+        fileMenu.add(openButton);
+        var saveButton = new JMenuItem("Save");
+        saveButton.setActionCommand("save");
+        saveButton.addActionListener(menuAction);
+        fileMenu.add(saveButton);
+        var saveAsButton = new JMenuItem("Save As");
+        saveAsButton.setActionCommand("save as");
+        saveAsButton.addActionListener(menuAction);
+        fileMenu.add(saveAsButton);
+
+        window.add(menu, BorderLayout.NORTH);
+
         JScrollPane scroll = new JScrollPane(textBox);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
@@ -53,12 +81,6 @@ public class Main{
                 }
             }
         });
-
-        Font font = new Font("Times New Roman", Font.PLAIN, 14);
-        textBox.setFont(font);
-        textBox.setTabSize(4);
-        textBox.setLineWrap(true);
-        textBox.setWrapStyleWord(true);
         window.setVisible(true);
 
     }

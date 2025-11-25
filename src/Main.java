@@ -44,14 +44,17 @@ public class Main{
         textBox.setWrapStyleWord(true);
         var menuAction = new MenuActionListener(textBox);
         openButton.addActionListener(menuAction);
+        openButton.setAccelerator(KeyStroke.getKeyStroke('O', ActionEvent.CTRL_MASK));
         fileMenu.add(openButton);
         var saveButton = new JMenuItem("Save");
         saveButton.setActionCommand("save");
         saveButton.addActionListener(menuAction);
+        saveButton.setAccelerator(KeyStroke.getKeyStroke('S', ActionEvent.CTRL_MASK));
         fileMenu.add(saveButton);
         var saveAsButton = new JMenuItem("Save As");
         saveAsButton.setActionCommand("save as");
         saveAsButton.addActionListener(menuAction);
+        saveAsButton.setAccelerator(KeyStroke.getKeyStroke('E', ActionEvent.CTRL_MASK));
         fileMenu.add(saveAsButton);
 
         window.add(menu, BorderLayout.NORTH);

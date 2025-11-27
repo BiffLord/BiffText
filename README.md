@@ -13,5 +13,11 @@ Right now, it kind of sucks but I'm still working on a better name
 ## Dependencies
 I wanted to learn how to use libraries thus this requires a library.
 The Library is my personal BiffLib.
+
+##Self-made
+Parts of this program were in itself. This includes:
+* Printing
+* Parts of this README.md
 ## Notes
 * All by me (including the dependency)
+

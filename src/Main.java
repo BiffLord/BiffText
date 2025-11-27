@@ -17,7 +17,7 @@ public class Main{
         textBox.setLineWrap(true);
         textBox.setWrapStyleWord(true);
         textBox.setMargin(new Insets(0,10,0,0));
-        var menuAction = new MenuActionListener(textBox);
+        var menuAction = new MenuActionListener(textBox,window);
         window.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {

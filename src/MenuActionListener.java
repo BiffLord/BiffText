@@ -13,45 +13,52 @@ import net.bifflib.files.FileUploader;
 public class MenuActionListener implements ActionListener {
     JTextArea text;
     String filePath = null;
-    public MenuActionListener(JTextArea text){
+    JFrame window;
+    public MenuActionListener(JTextArea text, JFrame window){
         this.text = text;
+        this.window = window;
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("open file")){
-            JFileChooser chooser = new JFileChooser();
-            if (chooser.showOpenDialog(chooser) == JFileChooser.APPROVE_OPTION){
-                filePath = chooser.getSelectedFile().getAbsolutePath();
-                System.out.println(filePath);
-                StringBuilder contents = new StringBuilder();
-                List<String> file = FileDownloader.loadFile(filePath);
-                file.forEach(x->contents.append(x).append("\n"));
-                text.setText(contents.toString());
+        switch (e.getActionCommand()) {
+            case "open file" -> {
+                JFileChooser chooser = new JFileChooser();
+                if (chooser.showOpenDialog(window) == JFileChooser.APPROVE_OPTION) {
+                    filePath = chooser.getSelectedFile().getAbsolutePath();
+                    System.out.println(filePath);
+                    StringBuilder contents = new StringBuilder();
+                    List<String> file = FileDownloader.loadFile(filePath);
+                    file.forEach(x -> contents.append(x).append("\n"));
+                    text.setText(contents.toString());
 
-            }
-        } else if (e.getActionCommand().equals("save")){
-            if (filePath != null){
-                net.bifflib.files.FileUploader.uploadFile(filePath,text.getText());
-            } else{
-                actionPerformed(new ActionEvent(e.getSource(), e.getID(), "save as"));
-            }
-        } else if (e.getActionCommand().equals("save as")){
-            JFileChooser chooser = new JFileChooser();
-            if (chooser.showOpenDialog(chooser) == JFileChooser.APPROVE_OPTION){
-                filePath = chooser.getSelectedFile().getAbsolutePath();
-                try{
-                    FileUploader.uploadFile(filePath, text.getText());
-                } catch (RuntimeException RE){
-                    makeNewFile();
                 }
-
             }
-        } else if (e.getActionCommand().equals("print")) {
+            case "save" -> {
+                if (filePath != null) {
+                    FileUploader.uploadFile(filePath, text.getText());
+                } else {
+                    actionPerformed(new ActionEvent(e.getSource(), e.getID(), "save as"));
+                }
+            }
+            case "save as" -> {
+                JFileChooser chooser = new JFileChooser();
+                if (chooser.showOpenDialog(window) == JFileChooser.APPROVE_OPTION) {
+                    filePath = chooser.getSelectedFile().getAbsolutePath();
+                    try {
+                        FileUploader.uploadFile(filePath, text.getText());
+                    } catch (RuntimeException RE) {
+                        makeNewFile();
+                    }
+
+                }
+            }
+            case "print" -> {
                 try {
                     text.print();
                 } catch (PrinterException ex) {
                     throw new RuntimeException(ex);
                 }
+            }
         }
     }
     private void makeNewFile(){

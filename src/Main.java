@@ -16,6 +16,7 @@ public class Main{
         textBox.setTabSize(1);
         textBox.setLineWrap(true);
         textBox.setWrapStyleWord(true);
+        textBox.setMargin(new Insets(0,10,0,0));
         var menuAction = new MenuActionListener(textBox);
         window.addWindowListener(new WindowAdapter() {
             @Override
@@ -65,16 +66,17 @@ public class Main{
         saveAsButton.addActionListener(menuAction);
         saveAsButton.setAccelerator(KeyStroke.getKeyStroke('E', ActionEvent.CTRL_MASK));
         fileMenu.add(saveAsButton);
-
         window.add(menu, BorderLayout.NORTH);
-
+        var distraction = new JRadioButton("distraction");
+        window.add(distraction);
+        distraction.requestFocusInWindow();
+        fileMenu.requestFocusInWindow();
         JScrollPane scroll = new JScrollPane(textBox);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
         scroll.setPreferredSize(new Dimension(100,100));
         scroll.setVisible(true);
         window.add(scroll);
-        scroll.getVerticalScrollBar().requestFocusInWindow();
 
 
 
@@ -89,7 +91,7 @@ public class Main{
             @Override
             public void focusLost(FocusEvent e) {
                 if (textBox.getText().isEmpty()){
-                    //textBox.setText("Type Here: ");
+                    textBox.setText("Type Here: ");
                 }
             }
         });

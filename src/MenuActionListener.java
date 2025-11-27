@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -27,16 +29,13 @@ public class MenuActionListener implements ActionListener {
                 text.setText(contents.toString());
 
             }
-        }
-        else if (e.getActionCommand().equals("save")){
+        } else if (e.getActionCommand().equals("save")){
             if (filePath != null){
                 net.bifflib.files.FileUploader.uploadFile(filePath,text.getText());
             } else{
                 actionPerformed(new ActionEvent(e.getSource(), e.getID(), "save as"));
             }
-        }
-
-        else if (e.getActionCommand().equals("save as")){
+        } else if (e.getActionCommand().equals("save as")){
             JFileChooser chooser = new JFileChooser();
             if (chooser.showOpenDialog(chooser) == JFileChooser.APPROVE_OPTION){
                 filePath = chooser.getSelectedFile().getAbsolutePath();
@@ -47,6 +46,12 @@ public class MenuActionListener implements ActionListener {
                 }
 
             }
+        } else if (e.getActionCommand().equals("print")) {
+                try {
+                    text.print();
+                } catch (PrinterException ex) {
+                    throw new RuntimeException(ex);
+                }
         }
     }
     private void makeNewFile(){

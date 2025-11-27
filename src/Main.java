@@ -44,7 +44,11 @@ public class Main{
         fileMenu.setMnemonic('F');
 
         menu.add(fileMenu);
-        fileMenu.add(new JMenuItem("Print"));
+        var printButton = new JMenuItem("Print");
+        printButton.setActionCommand("print");
+        printButton.addActionListener(menuAction);
+        printButton.setAccelerator(KeyStroke.getKeyStroke('P', ActionEvent.CTRL_MASK));
+        fileMenu.add(printButton);
         var openButton = new JMenuItem("Open");
         openButton.setActionCommand("open file");
 
@@ -85,7 +89,7 @@ public class Main{
             @Override
             public void focusLost(FocusEvent e) {
                 if (textBox.getText().isEmpty()){
-                    textBox.setText("Type Here: ");
+                    //textBox.setText("Type Here: ");
                 }
             }
         });

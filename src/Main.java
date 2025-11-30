@@ -12,7 +12,7 @@ public class Main{
         boolean saved = false;
         Font font;
         try{
-            InputStream fontFile = Main.class.getResourceAsStream("times.ttf");
+            InputStream fontFile = Main.class.getResourceAsStream("texgyretermes-regular.otf");
             if (fontFile == null){
                 throw new NullPointerException();
             }

@@ -3,15 +3,28 @@ import net.bifflib.GUI.Window;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+import java.io.InputStream;
+
 public class Main{
     public static void main(String[] args) {
         //This comment, wrote in this program, BY this program
         boolean saved = false;
+        Font font;
+        try{
+            InputStream fontFile = Main.class.getResourceAsStream("times.ttf");
+            if (fontFile == null){
+                throw new NullPointerException();
+            }
+            font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(14f);
+        } catch (IOException | FontFormatException | NullPointerException e) {
+            throw new RuntimeException(e);
+        }
         JFrame window = Window.makeWindow(800,700,"Text Editor",new ImageIcon(Main.class.getResource("T.png")).getImage(), Color.WHITE);
         window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         JTextArea textBox = new JTextArea(8,5);
         textBox.setText("Type Here: ");
-        Font font = new Font("Times New Roman", Font.PLAIN, 14);
+
         textBox.setFont(font);
         textBox.setTabSize(1);
         textBox.setLineWrap(true);
@@ -48,23 +61,23 @@ public class Main{
         var printButton = new JMenuItem("Print");
         printButton.setActionCommand("print");
         printButton.addActionListener(menuAction);
-        printButton.setAccelerator(KeyStroke.getKeyStroke('P', ActionEvent.CTRL_MASK));
+        printButton.setAccelerator(KeyStroke.getKeyStroke('P', InputEvent.CTRL_DOWN_MASK));
         fileMenu.add(printButton);
         var openButton = new JMenuItem("Open");
         openButton.setActionCommand("open file");
 
         openButton.addActionListener(menuAction);
-        openButton.setAccelerator(KeyStroke.getKeyStroke('O', ActionEvent.CTRL_MASK));
+        openButton.setAccelerator(KeyStroke.getKeyStroke('O', InputEvent.CTRL_DOWN_MASK));
         fileMenu.add(openButton);
         var saveButton = new JMenuItem("Save");
         saveButton.setActionCommand("save");
         saveButton.addActionListener(menuAction);
-        saveButton.setAccelerator(KeyStroke.getKeyStroke('S', ActionEvent.CTRL_MASK));
+        saveButton.setAccelerator(KeyStroke.getKeyStroke('S', InputEvent.CTRL_DOWN_MASK));
         fileMenu.add(saveButton);
         var saveAsButton = new JMenuItem("Save As");
         saveAsButton.setActionCommand("save as");
         saveAsButton.addActionListener(menuAction);
-        saveAsButton.setAccelerator(KeyStroke.getKeyStroke('E', ActionEvent.CTRL_MASK));
+        saveAsButton.setAccelerator(KeyStroke.getKeyStroke('E', InputEvent.CTRL_DOWN_MASK));
         fileMenu.add(saveAsButton);
         window.add(menu, BorderLayout.NORTH);
         var distraction = new JRadioButton("distraction");

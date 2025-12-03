@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -25,11 +24,7 @@ public class MenuActionListener implements ActionListener {
                 JFileChooser chooser = new JFileChooser();
                 if (chooser.showOpenDialog(window) == JFileChooser.APPROVE_OPTION) {
                     filePath = chooser.getSelectedFile().getAbsolutePath();
-                    System.out.println(filePath);
-                    StringBuilder contents = new StringBuilder();
-                    List<String> file = FileDownloader.loadFile(filePath);
-                    file.forEach(x -> contents.append(x).append("\n"));
-                    text.setText(contents.toString());
+                    open();
 
                 }
             }
@@ -68,5 +63,15 @@ public class MenuActionListener implements ActionListener {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+    public void open(){
+        StringBuilder contents = new StringBuilder();
+        List<String> file = FileDownloader.loadFile(filePath);
+        file.forEach(x -> contents.append(x).append("\n"));
+        text.setText(contents.toString());
+    }
+    public void open(String filePath){
+        this.filePath = filePath;
+        open();
     }
 }

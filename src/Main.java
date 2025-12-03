@@ -31,6 +31,9 @@ public class Main{
         textBox.setWrapStyleWord(true);
         textBox.setMargin(new Insets(0,10,0,0));
         var menuAction = new MenuActionListener(textBox,window);
+        if (args.length != 0){
+            menuAction.open(args[0]);
+        }
         window.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {

@@ -11,9 +11,9 @@ public class Main{
     public static void main(String[] args) {
         //This comment, wrote in this program, BY this program
         boolean saved = false;
-        Font font;
+        Font font = new Font("Times New Roman",Font.PLAIN, 14);
         try{
-            InputStream fontFile = Main.class.getResourceAsStream("texgyretermes-regular.otf");
+            InputStream fontFile = Main.class.getResourceAsStream("/texgyretermes-regular.otf");
             if (fontFile == null){
                 throw new NullPointerException();
             }
@@ -21,7 +21,7 @@ public class Main{
         } catch (IOException | FontFormatException | NullPointerException e) {
             throw new RuntimeException(e);
         }
-        JFrame window = Window.makeWindow(800,700,"Text Editor",new ImageIcon(Main.class.getResource("T.png")).getImage(), Color.WHITE);
+        JFrame window = Window.makeWindow(800,700,"Text Editor",new ImageIcon(Main.class.getResource("/T.png")).getImage(), Color.WHITE);
         window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         JTextArea textBox = new JTextArea(8,5);
         textBox.setText("Type Here: ");

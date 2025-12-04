@@ -1,3 +1,4 @@
+package net.biff;
 import net.bifflib.GUI.Window;
 
 import javax.swing.*;

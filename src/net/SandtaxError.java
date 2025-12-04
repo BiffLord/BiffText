@@ -1,3 +1,4 @@
+package net;
 import java.awt.*;
 public class SandtaxError extends HeadlessException {
     public SandtaxError() {

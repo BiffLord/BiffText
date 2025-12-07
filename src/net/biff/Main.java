@@ -11,6 +11,12 @@ public class Main{
     public static void main(String[] args) {
         //This comment, wrote in this program, BY this program
         boolean saved = false;
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+                 UnsupportedLookAndFeelException e) {
+            throw new RuntimeException(e);
+        }
         Font font = new Font("Times New Roman",Font.PLAIN, 14);
         try{
             InputStream fontFile = Main.class.getResourceAsStream("/texgyretermes-regular.otf");

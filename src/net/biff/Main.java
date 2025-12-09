@@ -20,10 +20,11 @@ public class Main{
         Font font = new Font("Times New Roman",Font.PLAIN, 14);
         try{
             InputStream fontFile = Main.class.getResourceAsStream("/texgyretermes-regular.otf");
+            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(Font.createFont(Font.TRUETYPE_FONT, Main.class.getResourceAsStream("/texgyretermes-regular.otf")));
             if (fontFile == null){
                 throw new NullPointerException();
             }
-            font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(14f);
+            font = new Font("texgyretermes-regular", Font.PLAIN, 14);
         } catch (IOException | FontFormatException | NullPointerException e) {
             throw new RuntimeException(e);
         }

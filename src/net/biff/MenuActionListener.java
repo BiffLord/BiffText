@@ -31,7 +31,8 @@ public class MenuActionListener implements ActionListener {
             }
             case "save" -> {
                 if (filePath != null) {
-                    FileUploader.uploadFile(filePath, text.getText());
+                    String textValue;
+                    FileUploader.uploadFile(filePath, ((textValue = text.getText()).equals("Type Here: ")) ? "":textValue);
                 } else {
                     actionPerformed(new ActionEvent(e.getSource(), e.getID(), "save as"));
                 }
@@ -40,8 +41,9 @@ public class MenuActionListener implements ActionListener {
                 JFileChooser chooser = new JFileChooser();
                 if (chooser.showOpenDialog(window) == JFileChooser.APPROVE_OPTION) {
                     filePath = chooser.getSelectedFile().getAbsolutePath();
+                    String textValue;
                     try {
-                        FileUploader.uploadFile(filePath, text.getText());
+                        FileUploader.uploadFile(filePath, ((textValue = text.getText()).equals("Type Here: ")) ? "":textValue);
                     } catch (RuntimeException RE) {
                         makeNewFile();
                     }

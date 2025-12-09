@@ -31,7 +31,7 @@ public class Main{
         JFrame window = Window.makeWindow(800,700,"Text Editor",new ImageIcon(Main.class.getResource("/T.png")).getImage(), Color.WHITE);
         window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         JTextArea textBox = new JTextArea(8,5);
-        textBox.setText("Type Here: ");
+        textBox.setText("Type Here: ㅤ");
 
         textBox.setFont(font);
         textBox.setTabSize(1);
@@ -107,7 +107,7 @@ public class Main{
         textBox.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (textBox.getText().equals("Type Here: ")){
+                if (textBox.getText().equals("Type Here: ㅤ")){
                     textBox.setText("");
                 }
             }
@@ -115,7 +115,7 @@ public class Main{
             @Override
             public void focusLost(FocusEvent e) {
                 if (textBox.getText().isEmpty()){
-                    textBox.setText("Type Here: ");
+                    textBox.setText("Type Here: ㅤ");
                 }
             }
         });

@@ -21,7 +21,7 @@ public class MenuActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
-            case "open file" -> {
+            case "Open" -> {
                 JFileChooser chooser = new JFileChooser();
                 if (chooser.showOpenDialog(window) == JFileChooser.APPROVE_OPTION) {
                     filePath = chooser.getSelectedFile().getAbsolutePath();
@@ -29,7 +29,7 @@ public class MenuActionListener implements ActionListener {
 
                 }
             }
-            case "save" -> {
+            case "Save" -> {
                 if (filePath != null) {
                     String textValue;
                     FileUploader.uploadFile(filePath, ((textValue = text.getText()).equals("Type Here: ㅤ")) ? "":textValue);
@@ -37,7 +37,7 @@ public class MenuActionListener implements ActionListener {
                     actionPerformed(new ActionEvent(e.getSource(), e.getID(), "save as"));
                 }
             }
-            case "save as" -> {
+            case "Save As" -> {
                 JFileChooser chooser = new JFileChooser();
                 if (chooser.showOpenDialog(window) == JFileChooser.APPROVE_OPTION) {
                     filePath = chooser.getSelectedFile().getAbsolutePath();
@@ -50,7 +50,7 @@ public class MenuActionListener implements ActionListener {
 
                 }
             }
-            case "print" -> {
+            case "Print" -> {
                 try {
                     text.print();
                 } catch (PrinterException ex) {

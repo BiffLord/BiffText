@@ -66,30 +66,17 @@ public class Main{
 
         JMenuBar menu = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
+        fileMenu.setFont(new Font("texgyretermes-regular", Font.PLAIN, 12));
         fileMenu.setMnemonic('F');
 
         menu.add(fileMenu);
-        var printButton = new JMenuItem("Print");
-        printButton.setActionCommand("print");
-        printButton.addActionListener(menuAction);
-        printButton.setAccelerator(KeyStroke.getKeyStroke('P', InputEvent.CTRL_DOWN_MASK));
-        fileMenu.add(printButton);
-        var openButton = new JMenuItem("Open");
-        openButton.setActionCommand("open file");
 
-        openButton.addActionListener(menuAction);
-        openButton.setAccelerator(KeyStroke.getKeyStroke('O', InputEvent.CTRL_DOWN_MASK));
-        fileMenu.add(openButton);
-        var saveButton = new JMenuItem("Save");
-        saveButton.setActionCommand("save");
-        saveButton.addActionListener(menuAction);
-        saveButton.setAccelerator(KeyStroke.getKeyStroke('S', InputEvent.CTRL_DOWN_MASK));
-        fileMenu.add(saveButton);
-        var saveAsButton = new JMenuItem("Save As");
-        saveAsButton.setActionCommand("save as");
-        saveAsButton.addActionListener(menuAction);
-        saveAsButton.setAccelerator(KeyStroke.getKeyStroke('E', InputEvent.CTRL_DOWN_MASK));
-        fileMenu.add(saveAsButton);
+
+        fileMenu.add(menuItemMaker("Print",menuAction,'P'));
+        fileMenu.add(menuItemMaker("Open",menuAction,'O'));
+        fileMenu.add(menuItemMaker("Save",menuAction,'S'));
+        fileMenu.add(menuItemMaker("Save As",menuAction,'E'));
+
         window.add(menu, BorderLayout.NORTH);
         var distraction = new JRadioButton("distraction");
         window.add(distraction);
@@ -121,5 +108,14 @@ public class Main{
         });
         window.setVisible(true);
 
+    }
+    private static JMenuItem menuItemMaker(String text,ActionListener actionListener, char accelerator){
+        JMenuItem menuItem = new JMenuItem();
+        menuItem.setText(text);
+        menuItem.setActionCommand(text);
+        menuItem.addActionListener(actionListener);
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(accelerator, InputEvent.CTRL_DOWN_MASK));
+        menuItem.setFont(new Font("texgyretermes-regular", Font.PLAIN, 12));
+        return  menuItem;
     }
 }

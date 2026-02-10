@@ -39,7 +39,7 @@ public class MenuActionListener implements ActionListener {
             }
             case "Save As" -> {
                 JFileChooser chooser = new JFileChooser();
-                if (chooser.showOpenDialog(window) == JFileChooser.APPROVE_OPTION) {
+                if (chooser.showSaveDialog(window) == JFileChooser.APPROVE_OPTION) {
                     filePath = chooser.getSelectedFile().getAbsolutePath();
                     String textValue;
                     try {
@@ -68,10 +68,7 @@ public class MenuActionListener implements ActionListener {
         }
     }
     public void open(){
-        StringBuilder contents = new StringBuilder();
-        List<String> file = FileDownloader.loadFile(filePath);
-        file.forEach(x -> contents.append(x).append("\n"));
-        text.setText(contents.toString());
+        text.setText(FileDownloader.loadToString(filePath));
     }
     public void open(String filePath){
         this.filePath = filePath;

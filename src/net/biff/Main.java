@@ -7,14 +7,11 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
 
 public class Main{
     public static void main(String[] args) {
         //This comment, wrote in this program, BY this program
-        boolean saved = false;
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
@@ -22,8 +19,7 @@ public class Main{
             throw new RuntimeException(e);
         }
         Font font;
-        try{
-            InputStream fontFile = Main.class.getResourceAsStream("/texgyretermes-regular.otf");
+        try (InputStream fontFile =Main.class.getResourceAsStream("/texgyretermes-regular.otf")){
             GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(Font.createFont(Font.TRUETYPE_FONT, Main.class.getResourceAsStream("/texgyretermes-regular.otf")));
             if (fontFile == null){
                 throw new NullPointerException();

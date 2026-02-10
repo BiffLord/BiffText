@@ -34,7 +34,7 @@ public class MenuActionListener implements ActionListener {
                     String textValue;
                     FileUploader.uploadFile(filePath, ((textValue = text.getText()).equals("Type Here: ㅤ")) ? "":textValue);
                 } else {
-                    actionPerformed(new ActionEvent(e.getSource(), e.getID(), "save as"));
+                    actionPerformed(new ActionEvent(e.getSource(), e.getID(), "Save As"));
                 }
             }
             case "Save As" -> {

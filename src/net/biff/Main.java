@@ -1,11 +1,15 @@
 package net.biff;
 import net.bifflib.GUI.Window;
+import net.bifflib.files.FileDownloader;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Main{
     public static void main(String[] args) {
@@ -17,7 +21,7 @@ public class Main{
                  UnsupportedLookAndFeelException e) {
             throw new RuntimeException(e);
         }
-        Font font = new Font("Times New Roman",Font.PLAIN, 14);
+        Font font;
         try{
             InputStream fontFile = Main.class.getResourceAsStream("/texgyretermes-regular.otf");
             GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(Font.createFont(Font.TRUETYPE_FONT, Main.class.getResourceAsStream("/texgyretermes-regular.otf")));
@@ -45,6 +49,11 @@ public class Main{
         window.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                if (menuAction.filePath==null && textBox.getText().equals("Type Here: ㅤ")){
+                    System.exit(0);
+                } else if (textBox.getText().equals(FileDownloader.loadToString(menuAction.filePath))){
+                    System.exit(0);
+                }
                 int button = JOptionPane.showOptionDialog(window,
                         "Your Work has not been saved. Do you want to save it?",
                         "Save Warning",
@@ -57,7 +66,7 @@ public class Main{
                     System.exit(0);
                 }
                 else if (button ==0){
-                    menuAction.actionPerformed(new ActionEvent(window, 1, "save"));
+                    menuAction.actionPerformed(new ActionEvent(window, 1, "Save"));
                     System.exit(0);
                 }
 

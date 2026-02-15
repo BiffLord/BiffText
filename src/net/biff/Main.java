@@ -12,6 +12,9 @@ import java.io.InputStream;
 
 public class Main{
     private static Font menuFont;
+    private static FileMenuActionListener fMenuAction;
+    private static EditMenuActionListener eMenuAction;
+
     public static void main(String[] args) {
         //This comment, wrote in this program, BY this program
         try {
@@ -43,16 +46,15 @@ public class Main{
         textBox.setMargin(new Insets(0,10,0,0));
         UndoManager UM = new UndoManager();
         textBox.getDocument().addUndoableEditListener(UM);
-        var fMenuAction = new FileMenuActionListener(textBox,window);
+        fMenuAction = new FileMenuActionListener(textBox,window);
 
         var wcl = new WindowClosingListener(window,fMenuAction,textBox);
         fMenuAction.addWindowClosingListener(wcl);
         window.addWindowListener(wcl);
-        var eMenuAct = new EditMenuActionListener(textBox,UM);
+        eMenuAction = new EditMenuActionListener(textBox,UM);
         JMenuBar menu = new JMenuBar();
         JMenu fileMenu = menuMaker("File",'f');
         JMenu editMenu = menuMaker("Edit",'e');
-        editMenu.addActionListener(eMenuAct);
         menu.add(fileMenu);
         menu.add(editMenu);
 
@@ -70,8 +72,14 @@ public class Main{
         copyFile.addActionListener(fMenuAction);
         copyFile.setFont(menuFont);
         fileMenu.add(copyFile);
-        editMenu.add(menuItemMaker("Undo",eMenuAct,'Z'));
-        editMenu.add(menuItemMaker("Redo",eMenuAct,'Y'));
+        editMenu.add(menuItemMaker("Undo",eMenuAction,'Z'));
+        editMenu.add(menuItemMaker("Redo",eMenuAction,'Y'));
+        editMenu.add(capitalItem("Uppercase",'U'));
+        editMenu.add(capitalItem("Lowercase",'L'));
+        editMenu.add(capitalItem("Capitalize",'C'));
+        editMenu.add(capitalItem("Title Case",'T'));
+        editMenu.add(capitalItem("Sentence Case",'S'));
+
         window.add(menu, BorderLayout.NORTH);
         var distraction = new JRadioButton("distraction");
         window.add(distraction);
@@ -116,6 +124,15 @@ public class Main{
         menuItem.setActionCommand(text);
         menuItem.addActionListener(actionListener);
         menuItem.setAccelerator(KeyStroke.getKeyStroke(accelerator, InputEvent.CTRL_DOWN_MASK));
+        menuItem.setFont(menuFont);
+        return  menuItem;
+    }
+    private static JMenuItem capitalItem(String text, char accelerator){
+        JMenuItem menuItem = new JMenuItem();
+        menuItem.setText(text);
+        menuItem.setActionCommand(text);
+        menuItem.addActionListener(eMenuAction);
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(accelerator, InputEvent.CTRL_DOWN_MASK | InputEvent.ALT_DOWN_MASK));
         menuItem.setFont(menuFont);
         return  menuItem;
     }

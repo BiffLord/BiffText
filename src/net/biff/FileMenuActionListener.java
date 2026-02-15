@@ -10,14 +10,14 @@ import java.io.IOException;
 import net.bifflib.files.FileDownloader;
 import net.bifflib.files.FileUploader;
 
-public class MenuActionListener implements ActionListener {
+public class FileMenuActionListener implements ActionListener {
     JTextArea text;
     String filePath = null;
     JFrame window;
     public boolean changing = false;
     public boolean making = false;
     WindowClosingListener wcl;
-    public MenuActionListener(JTextArea text, JFrame window){
+    public FileMenuActionListener(JTextArea text, JFrame window){
         this.text = text;
         this.window = window;
     }

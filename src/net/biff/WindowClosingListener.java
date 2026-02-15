@@ -8,12 +8,12 @@ import java.awt.event.WindowEvent;
 import javax.swing.*;
 
 public class WindowClosingListener extends WindowAdapter {
-    MenuActionListener menu;
+    FileMenuActionListener menu;
     JTextArea text;
     JFrame window;
     boolean closing=false;
     public boolean cancel = false;
-    public WindowClosingListener(JFrame window,MenuActionListener menu, JTextArea text) {
+    public WindowClosingListener(JFrame window, FileMenuActionListener menu, JTextArea text) {
         this.menu=menu;
         this.text=text;
         this.window=window;

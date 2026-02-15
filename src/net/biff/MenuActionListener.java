@@ -98,6 +98,7 @@ public class MenuActionListener implements ActionListener {
     }
     public void open(){
         text.setText(FileDownloader.loadToString(filePath));
+        window.setTitle("BiffText - "+filePath);
     }
     public void open(String filePath){
         this.filePath = filePath;

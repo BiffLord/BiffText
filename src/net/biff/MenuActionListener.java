@@ -39,6 +39,7 @@ public class MenuActionListener implements ActionListener {
                 JFileChooser chooser = new JFileChooser();
                 if (chooser.showOpenDialog(window) == JFileChooser.APPROVE_OPTION) {
                     filePath = chooser.getSelectedFile().getAbsolutePath();
+                    window.setTitle("BiffText - "+chooser.getSelectedFile());
                     open();
 
                 }
@@ -62,6 +63,7 @@ public class MenuActionListener implements ActionListener {
                     } catch (RuntimeException RE) {
                         makeNewFile();
                     }
+                    window.setTitle("BiffText - "+chooser.getSelectedFile());
 
                 }
             }
@@ -80,6 +82,7 @@ public class MenuActionListener implements ActionListener {
                     wcl.cancel = false;
                     return;
                 }
+                window.setTitle("BiffText - Untitled");
                 text.setText("");
                 changing = false;
             }

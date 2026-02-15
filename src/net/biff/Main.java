@@ -39,35 +39,10 @@ public class Main{
         textBox.setWrapStyleWord(true);
         textBox.setMargin(new Insets(0,10,0,0));
         var menuAction = new MenuActionListener(textBox,window);
-        if (args.length != 0){
-            menuAction.open(args[0]);
-        }
-        window.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                if (menuAction.filePath==null && textBox.getText().equals("Type Here: ㅤ")){
-                    System.exit(0);
-                } else if (textBox.getText().equals(FileDownloader.loadToString(menuAction.filePath))){
-                    System.exit(0);
-                }
-                int button = JOptionPane.showOptionDialog(window,
-                        "Your Work has not been saved. Do you want to save it?",
-                        "Save Warning",
-                        JOptionPane.YES_NO_CANCEL_OPTION,
-                        JOptionPane.INFORMATION_MESSAGE,
-                        null,
-                        null,
-                        null);
-                if (button == 1) {
-                    System.exit(0);
-                }
-                else if (button ==0){
-                    menuAction.actionPerformed(new ActionEvent(window, 1, "Save"));
-                    System.exit(0);
-                }
 
-            }
-        });
+        var wcl = new WindowClosingListener(window,menuAction,textBox);
+        menuAction.addWindowClosingListener(wcl);
+        window.addWindowListener(wcl);
 
         JMenuBar menu = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
@@ -81,7 +56,7 @@ public class Main{
         fileMenu.add(menuItemMaker("Open",menuAction,'O'));
         fileMenu.add(menuItemMaker("Save",menuAction,'S'));
         fileMenu.add(menuItemMaker("Save As",menuAction,'E'));
-
+        fileMenu.add(menuItemMaker("New",menuAction,'N'));
         window.add(menu, BorderLayout.NORTH);
         var distraction = new JRadioButton("distraction");
         window.add(distraction);
@@ -89,8 +64,10 @@ public class Main{
         fileMenu.requestFocusInWindow();
         JScrollPane scroll = new JScrollPane(textBox);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-
         scroll.setPreferredSize(new Dimension(100,100));
+        if (args.length != 0){
+            menuAction.open(args[0]);
+        }
         scroll.setVisible(true);
         window.add(scroll);
 
@@ -112,7 +89,6 @@ public class Main{
             }
         });
         window.setVisible(true);
-
     }
     private static JMenuItem menuItemMaker(String text,ActionListener actionListener, char accelerator){
         JMenuItem menuItem = new JMenuItem();

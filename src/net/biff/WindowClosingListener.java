@@ -21,7 +21,7 @@ public class WindowClosingListener extends WindowAdapter {
     @Override
     public void windowClosing(WindowEvent e) {
         closing= true;
-        if (menu.filePath==null && text.getText().equals("Type Here: ㅤ")){
+        if (menu.filePath==null && (text.getText().equals("Type Here: ㅤ") || text.getText().isEmpty())){
             finish();return;
         } else if (text.getText().equals(FileDownloader.loadToString(menu.filePath))){
             finish();return;

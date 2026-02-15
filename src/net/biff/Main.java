@@ -64,6 +64,12 @@ public class Main{
         fileMenu.add(menuItemMaker("Save",fMenuAction,'S'));
         fileMenu.add(menuItemMaker("Save As",fMenuAction,'E'));
         fileMenu.add(menuItemMaker("New",fMenuAction,'N'));
+        JMenuItem copyFile = new JMenuItem("Copy File");
+        copyFile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.SHIFT_DOWN_MASK | InputEvent.CTRL_DOWN_MASK));
+        copyFile.setActionCommand("Copy File");
+        copyFile.addActionListener(fMenuAction);
+        copyFile.setFont(menuFont);
+        fileMenu.add(copyFile);
         editMenu.add(menuItemMaker("Undo",eMenuAct,'Z'));
         editMenu.add(menuItemMaker("Redo",eMenuAct,'Y'));
         window.add(menu, BorderLayout.NORTH);

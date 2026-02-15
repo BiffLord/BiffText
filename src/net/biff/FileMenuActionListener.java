@@ -1,5 +1,6 @@
 package net.biff;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -41,7 +42,6 @@ public class FileMenuActionListener implements ActionListener {
                     filePath = chooser.getSelectedFile().getAbsolutePath();
                     window.setTitle("BiffText - "+chooser.getSelectedFile());
                     open();
-
                 }
                 changing = false;
             }
@@ -82,8 +82,35 @@ public class FileMenuActionListener implements ActionListener {
                     wcl.cancel = false;
                     return;
                 }
+                filePath = null;
                 window.setTitle("BiffText - Untitled");
                 text.setText("");
+                changing = false;
+            }
+            case "Copy File"->{
+                System.out.println("yo");
+                changing = true;
+                wcl.windowClosing(new WindowEvent(window,0));
+                if (wcl.cancel){
+                    changing = false;
+                    wcl.cancel = false;
+                    return;
+                }
+                if (filePath == null){
+                    JDialog warning = new JDialog(window);
+                    JTextArea warn = new JTextArea("You can't copy a non-existant file");
+                    warn.setFocusable(false);
+                    warning.setTitle("Warning");
+                    warning.setSize(400,100);
+                    warning.add(warn, BorderLayout.CENTER);
+                    warning.setModal(true);
+                    warning.setVisible(true);
+                    changing = false;
+                    return;
+                }
+                String[] file = filePath.split("\\\\");
+                filePath = null;
+                window.setTitle("BiffText - "+file[file.length-1]+" (Copy)");
                 changing = false;
             }
         }

@@ -160,7 +160,7 @@ public class EditMenuActionListener implements ActionListener {
         String changed = sc.change(contents.substring(this.start,this.start+select.length()));
         String end = contents.substring(this.start+select.length());
         text.setText(start+changed+end);
-        //text.setCaretPosition(this.start+select.length()-1);
+        text.setCaretPosition(this.start+select.length());
     }
     @FunctionalInterface
     interface StringChanger{

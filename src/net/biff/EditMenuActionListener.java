@@ -158,7 +158,7 @@ public class EditMenuActionListener implements ActionListener {
         if (select == null){return;}
         String start = contents.substring(0,this.start);
         String changed = sc.change(contents.substring(this.start,this.start+select.length()));
-        String end = contents.substring(this.start+select.length()-1,contents.length()-1);
+        String end = contents.substring(this.start+select.length());
         text.setText(start+changed+end);
         //text.setCaretPosition(this.start+select.length()-1);
     }
